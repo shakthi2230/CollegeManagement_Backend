@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 from datetime import timedelta
 from decouple import config
+from django.core.wsgi import get_wsgi_application
 
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -13,6 +14,8 @@ SECRET_KEY = 'django-insecure-z(_ib%1%5l&8j1vml9e$8=on0k7bzh&vp5@_-5h9bl@z@0@(3b
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*'] 
+
+
 
 # Installed apps
 INSTALLED_APPS = [
