@@ -7,4 +7,5 @@ db.sqlite3
 *.pyo
 *.db
 *.sqlite3
+*.env
 
