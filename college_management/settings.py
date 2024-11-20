@@ -3,15 +3,15 @@ import os
 from datetime import timedelta
 from decouple import config
 from django.core.wsgi import get_wsgi_application
-
+import dj_database_url
 # Paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security
 SECRET_KEY = 'django-insecure-z(_ib%1%5l&8j1vml9e$8=on0k7bzh&vp5@_-5h9bl@z@0@(3b'
 
-# DEBUG = True
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
+# DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*'] 
 
@@ -41,6 +41,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.contrib.staticfiles.middleware.StaticFilesMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
+    
 ]
 
 # CORS configuration
@@ -71,15 +74,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'college_management.wsgi.application'
 
 # Database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': config('DB_ENGINE', default='django.db.backends.mysql'),
+#         'NAME': config('DB_NAME', default='backend'),
+#         'USER': config('DB_USER', default='root'),
+#         'PASSWORD': config('DB_PASSWORD', default=''),
+#         'HOST': config('DB_HOST', default='localhost'),
+#         'PORT': config('DB_PORT', default='3306'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': config('DB_ENGINE', default='django.db.backends.mysql'),
-        'NAME': config('DB_NAME', default='backend'),
-        'USER': config('DB_USER', default='root'),
-        'PASSWORD': config('DB_PASSWORD', default=''),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default='3306'),
-    }
+    'default': dj_database_url.config(
+        default='postgresql://clgmanagementdb_user:uVJrHAHYamU41do4n8XVtlZD7H0WGMAx@dpg-csufsubqf0us738retd0-a.singapore-postgres.render.com/clgmanagementdb'
+    )
 }
 # Django REST Framework
 REST_FRAMEWORK = {
@@ -131,7 +140,11 @@ USE_I18N = True
 USE_TZ = True
 
 # Static files
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
