@@ -36,8 +36,6 @@ from  ...models import Student
 from django.contrib.auth.hashers import check_password
 from django.conf import settings
 
-BASE_URL = getattr(settings, 'BASE_URL', 'http://localhost:8000')
-
 class StudentLoginView(APIView):
     def post(self, request):
        
@@ -69,8 +67,10 @@ class StudentLoginView(APIView):
                 "blood_group": student.blood_group,
                 "contact_number": student.contact_number,
                 "address": student.address,
-                "profile_pic":  f"{BASE_URL}{student.profile_pic.url}" if student.profile_pic else None
+                "profile_pic": student.profile_pic.url if student.profile_pic else None
             }
+            
+            # print(student_data)
 
             return Response({
                 "message": "Login successful",
