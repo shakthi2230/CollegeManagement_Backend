@@ -27,7 +27,7 @@ from .Views.Faculty.facultydetailview import FacultyDetailView
 
 urlpatterns = [
     path('faculty/login/', FacultyLoginView.as_view(), name='faculty-login'),
-     path('faculty/<int:pk>/update/', FacultyUpdateView.as_view(), name='faculty-update'),
+    path('faculty/<int:pk>/update/', FacultyUpdateView.as_view(), name='faculty-update'),
 
     path('student/register/', StudentRegistrationView.as_view(), name='student-register'),
     path('student/login/', StudentLoginView.as_view(), name='student-login'),
@@ -40,6 +40,6 @@ urlpatterns = [
     path('faculty/<int:faculty_id>/assignments/', AssignmentsByFacultyView.as_view(), name='assignments-by-faculty'),
     path('faculty/<int:faculty_id>/assignments/<int:assignment_id>/delete/', AssignmentDeleteView.as_view(), name='delete-assignment'),
 
-     path('faculty/<int:pk>/', FacultyDetailView.as_view(), name='faculty-detail'),
+    path('faculty/<int:pk>/', FacultyDetailView.as_view(), name='faculty-detail'),
 ]
 

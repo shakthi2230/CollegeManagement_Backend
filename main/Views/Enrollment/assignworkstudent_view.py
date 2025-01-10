@@ -7,12 +7,12 @@ class AssignWorkToStudentsView(APIView):
 
     def post(self, request):
         
-        # Validation  and create assignment process here
+   
         serializer = AssignmentSerializer(data=request.data)
 
         if serializer.is_valid():
 
-            assignment = serializer.save()  # Will automaticallyy assign studnts based on the faculty and subject
+            assignment = serializer.save()  
 
             return Response({
                 'message': 'Assignment created successfully',

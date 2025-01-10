@@ -29,14 +29,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'main',  # Replace with your app's name
+    'main', 
 ]
 
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',  # Ensure this is above CommonMiddleware
+    'corsheaders.middleware.CorsMiddleware',  
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -49,8 +49,9 @@ MIDDLEWARE = [
 
 # CORS configuration
 CORS_ALLOW_ALL_ORIGINS = True 
+
 CORS_ALLOWED_ORIGINS = [
-    'https://collegemanagement-ten.vercel.app','http://localhost:3000'  # Add your frontend URL here
+    'https://collegemanagement-ten.vercel.app','http://localhost:3000'  
 ]
 
 
@@ -78,23 +79,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'college_management.wsgi.application'
 
 # Database
+DATABASES = {
+    'default': {
+        'ENGINE': config('DB_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': config('DB_NAME', default='college_management'),
+        'USER': config('DB_USER', default='postgres'),
+        'PASSWORD': config('DB_PASSWORD', default='shakthi'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+    }
+}
+
 # DATABASES = {
-#     'default': {
-#         'ENGINE': config('DB_ENGINE', default='django.db.backends.mysql'),
-#         'NAME': config('DB_NAME', default='backend'),
-#         'USER': config('DB_USER', default='root'),
-#         'PASSWORD': config('DB_PASSWORD', default=''),
-#         'HOST': config('DB_HOST', default='localhost'),
-#         'PORT': config('DB_PORT', default='3306'),
-#     }
+#     'default': dj_database_url.config(
+#         default='postgresql://clgmanagementdb_user:uVJrHAHYamU41do4n8XVtlZD7H0WGMAx@dpg-csufsubqf0us738retd0-a.singapore-postgres.render.com/clgmanagementdb'
+#     )
 # }
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://clgmanagementdb_user:uVJrHAHYamU41do4n8XVtlZD7H0WGMAx@dpg-csufsubqf0us738retd0-a.singapore-postgres.render.com/clgmanagementdb'
-    )
-}
-# Django REST Framework
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
